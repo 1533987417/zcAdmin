@@ -56,6 +56,11 @@ let routes = [{
     path:"/minclass",
     name:"课节管理",
     component:require("./page/minclass.vue").default
+},
+{
+    path:"/banner",
+    name:"banner管理",
+    component:require("./page/banner.vue").default
 }]
 
 

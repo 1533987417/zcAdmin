@@ -48,6 +48,10 @@
       <i class="el-icon-news"></i>
       <span slot="title">购买记录</span>
     </el-menu-item>
+    <el-menu-item index="banner">
+      <i class="el-icon-news"></i>
+      <span slot="title">banner管理</span>
+    </el-menu-item>
   </el-menu>
 </div>
 </template>
