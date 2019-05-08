@@ -30,6 +30,19 @@ p{
     font-size: 18px;
 }
 
+.show-user{
+    line-height: 66px;
+    margin-right: 40px;
+    height: 100%;
+    float: right
+}
+.show-user p{
+    color: #fff;
+    font-size: 14px;
+    margin-right: 20px;
+    display:inline-block;
+}
+
 .menu{
     position: fixed;
     top: 66px;

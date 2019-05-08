@@ -27,7 +27,7 @@ export default {
     //   clearTimeout(timer)
     // },2000)
     // message 示范
-    helper.message("成功展示","success")
+    // helper.message("成功展示","success")
     // alert 示范
     // helper.alertInfo("成功信息的展示","提示","success",function(){
     //   console.log("成功信息的展示")

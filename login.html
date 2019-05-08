@@ -13,18 +13,22 @@
                 <h2>欢迎登录</h2>
             </div>
             <div>
-                <el-form class="reset-form" :inline="false">
-                    <el-form-item class="input-middle reset-item">
-                        <el-input placeholder="请输入账号" v-model="loginForm.account">
+                <el-form class="reset-form" 
+                        :inline="false"
+                        :model="loginForm"
+                         ref="loginForm"
+                         :rules="rules">
+                    <el-form-item class="input-middle reset-item" prop="userName">
+                        <el-input placeholder="请输入账号" v-model="loginForm.userName">
                             <i slot="prefix" class="el-input__icon el-icon-tickets"></i>
                         </el-input>
                     </el-form-item>
-                    <el-form-item class="input-middle reset-item">
+                    <el-form-item class="input-middle reset-item"  prop="password">
                         <el-input type="password" placeholder="请输入密码" v-model="loginForm.password">
                             <i slot="prefix" class="el-input__icon el-icon-search"></i>
                         </el-input>
                     </el-form-item>
-                    <el-button type="primary" class="input-middle">点击登录</el-button>
+                    <el-button @click="loginAction" type="primary" class="input-middle">点击登录</el-button>
                 </el-form>
             </div>
             <div class="summary">

@@ -61,7 +61,7 @@ module.exports = {
       },
       devServer:{
         host:IP_ADDRESS,
-        port: "8080",
+        port: "8088",
         inline: true,
         open: true,
         compress: true, // 打包的内容进行压缩

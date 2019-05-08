@@ -17,7 +17,7 @@ let routes = [{
     component:require("./page/index.vue").default
 },{
     path:"/serach",
-    name:"主要课程,第一篇",
+    name:"课程列表",
     component:require("./page/serach.vue").default,
     children:[]
 },{
@@ -57,7 +57,7 @@ let routes = [{
     name:"课节管理",
     component:require("./page/minclass.vue").default
 },
-{
+,{
     path:"/banner",
     name:"banner管理",
     component:require("./page/banner.vue").default

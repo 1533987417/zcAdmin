@@ -47,7 +47,7 @@
 <el-table :data="tableData" border  style="width: 100%">
   <el-table-column align="center" type="index" label="序号" width="60"> </el-table-column>
   <el-table-column align="center" prop="Id" label="会员Id" width="120"></el-table-column>
-  <el-table-column align="center" prop="LogoUrl" label="头像" width="180">
+  <el-table-column align="center" prop="LogoUrl" label="头像" width="120">
     <template slot-scope="props">
       <div class="contain-imgs">
         <img :src="props.row.LogoUrl" alt="">

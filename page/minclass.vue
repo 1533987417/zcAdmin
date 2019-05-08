@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-tab></v-tab>
-		<v-search searchName="管理课节">
+		<!-- <v-search searchName="管理课节">
 			<template>
 				<el-form label-width="100px" label-position="right" :inline="true" :model="serachForm">
 
@@ -10,7 +10,7 @@
           </el-form-item>
         </el-form>
       </template>
-    </v-search>
+    </v-search> -->
 
     <!-- table组件 -->
     <v-table title="课节列表" :totalRecords="totalCount" ref="table" @pageChange="pageChange">
@@ -168,6 +168,7 @@ export default {
        else callback()
      }
    return {
+    pageId:0,
     options:[{value:"0",label:"正在排课"},{value:"1",label:"上线"},{value:"2",label:"下线"},{value:"3",label:"删除"}],
     classStatus:[{value:"0",label:"否"},{value:"1",label:"是"}],
     roles:[{
@@ -190,7 +191,7 @@ export default {
         {
 
           "Id": 1,
-          "CollageId": 2,
+          "CollageId": "",
           "ClassName": "",
           "ClassTimeLong": "",
           "ClassDetail": "",
@@ -318,7 +319,7 @@ export default {
       	let page = this.$refs["table"].getPagingInfo();
       	let para=Object.assign(this.serachForm,page);
       	console.log(para);
-      	http.httpGet("/api/v1/manager/collageclass/GetCollageClassList/"+2,{}).then(data=>{
+      	http.httpGet("/api/v1/manager/collageclass/GetCollageClassList/"+this.pageId,{}).then(data=>{
       		let result = data.Data,
       		totalCount = data.TotalCount   
       		this.tableData = result
@@ -341,6 +342,8 @@ export default {
       } 
     },
     created(){
+      this.pageId  = helper.routerDataGet().id || 0
+      this.form.CollageId = this.pageId
       http.httpPost("/api/v1/manager/collage/GetCollageList",{PageSiz:1000,PageIndex:1,status:1}).then(data=>{
         let result = data.Data
 

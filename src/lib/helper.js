@@ -13,9 +13,9 @@ import http from "./http"
         var ms = (this.getTime() - date.getTime()); // / 24 / 3600 / 1000;
 
         var day = Math.floor(ms / 24 / 3600 / 1000),
-            hh = Math.floor((ms / 3600 / 1000) % 24),
-            mm = Math.floor((ms / 1000 / 60) % 60),
-            ss = Math.floor((ms / 1000) % 60);
+        hh = Math.floor((ms / 3600 / 1000) % 24),
+        mm = Math.floor((ms / 1000 / 60) % 60),
+        ss = Math.floor((ms / 1000) % 60);
         return {
             day: day,
             hour: hh,
@@ -102,7 +102,7 @@ const helper = {
      * @param {Boolean} isC 是否居中
      * @param {Object/Json} opt 其他设置
      */
-    message: function (mes, type, isC, opt = {}) {
+     message: function (mes, type, isC, opt = {}) {
         let o = {
             message: mes || "",
             type: type || "",
@@ -114,7 +114,7 @@ const helper = {
     /**
      * @description 关闭Message实例的方法
      */
-    messageClose: function () {
+     messageClose: function () {
         Message.closeAll()
     },
     /**
@@ -126,7 +126,7 @@ const helper = {
      * type {success / info / warning / error}
      */
 
-    confirmInfo: function (mes, title = "提示", type, cb, opt = {}) {
+     confirmInfo: function (mes, title = "提示", type, cb, opt = {}) {
         let fn = (action) => {
             let i = action == "confirm" ? true : false;
             cb && cb(i);
@@ -203,6 +203,27 @@ const helper = {
                 console.log(response)
             }) 
         })
+    },
+    /*设置cookie*/
+    setCookie(name, value, iDay){
+        var oDate=new Date();
+        oDate.setDate(oDate.getDate()+iDay);
+        document.cookie=name+'='+value+';expires='+oDate;
+    },
+    getCookie(name){
+        var arr=document.cookie.split('; '); //多个cookie值是以; 分隔的，用split把cookie分割开并赋值给数组
+
+        for(var i of arr){ //历遍数组
+            var arr2=i.split('='); //原来割好的数组是：user=simon，再用split('=')分割成：user simon 这样可以通过arr2[0] arr2[1]来分别获取user和simon 
+            if(arr2[0]==name){ //如果数组的属性名等于传进来的name
+                return arr2[1]; //就返回属性名对应的值
+            }
+            
+        }
+        return ''; //没找到就返回空
+    },
+    removeCookie(name){
+        this.setCookie(name,1,-1); //-1就是告诉系统已经过期，系统就会立刻去删除cookie
     }
 }
 

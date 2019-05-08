@@ -6,7 +6,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 import "./css/common.css"
 import router from "./route"
 import helper from "./src/lib/helper"
-
 Vue.use(ElementUI);
 
 helper.init(router); // 初始化router对象
@@ -29,10 +28,18 @@ let App = new Vue({
   router,
   data(){
     return{
-      mes:"welcome to index11.vue"
+      mes:"welcome to index11.vue",
+      name:""
+    }
+  },
+  methods:{
+    logOff(){
+      helper.removeCookie("Token");
+      helper.removeCookie("name");
+      window.location.replace("./login.html")
     }
   },
   created(){
-    console.log("我在这里...")
+    this.name=helper.getCookie("name");
   }
 })  

@@ -27,14 +27,13 @@ axios.interceptors.response.use(function (response) {
     // 返回数据处理
     let data = response.data || {}
     if(loadingIns.close) loadingIns.close()
-
-    // handle 后端的坑 
-    /*if(data.Code != config.STATUS_SUCCESS){
-        helper.alertInfo(data.message || "未知错误","错误提示","error")
-    }*/
+    // if(data.Code != config.STATUS_SUCCESS){
+    //     helper.alertInfo(data.message || "未知错误","错误提示","error")
+    // }
     return data
 }, function (error) {
     // 对响应错误做点什么
+    console.log(error)
     if(loadingIns.close) loadingIns.close()
         helper.alertInfo(error,"错误提示","error")
     return Promise.reject(error);
@@ -42,18 +41,31 @@ axios.interceptors.response.use(function (response) {
 
 const http = {
     http(method,url,data,opts={}){
-        let userMethod = method.toLowerCase()
-        if(url.indexOf("http") === -1){ // 如果填写完整地址
-            url = API_URL + url
-        }
-        if(methodList[userMethod]){
-            let options = Object.assign({},{
-                method,
-                url:url,
-                data
-            },opts)
-            return axios(options)
-        }
+        // 校验token
+        // Token是否存在
+        // helper.getCookie("Token")
+        console.log("11111",helper.getCookie("Token"))
+        if(!helper.getCookie("Token")&&url!="/api/v1/manager/admin/login") {
+           helper.message("登录信息异常,2s后跳转登录页","warning",true,{
+            onClose() {
+                window.location.replace("./login.html")
+            }, 
+            duration:2000
+        }) 
+       }else{
+           let userMethod = method.toLowerCase()
+            if(url.indexOf("http") === -1){ // 如果填写完整地址
+                url = API_URL + url
+            }
+            if(methodList[userMethod]){
+                let options = Object.assign({},{
+                    method,
+                    url:url,
+                    data
+                },opts)
+                return axios(options)
+            } 
+        }   
     },
     httpPost(url,data,opts={}){
         return this.http("post",url,data,opts)

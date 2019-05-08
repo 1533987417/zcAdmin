@@ -41,7 +41,7 @@
     <el-table-column align="center" prop="Email" label="邮箱" width="200"></el-table-column>
 
     <el-table-column align="center" prop="Status" label="状态" width="50">
-     <template slot-scope="props">{{props.row.Status==0?"启用":"无效"}}</template>
+     <template slot-scope="props">{{props.row.Status==1?"启用":"无效"}}</template>
    </el-table-column>
    <el-table-column align="center" prop="Description" label="创建时间" width="180">
      <template slot-scope="props">
@@ -52,7 +52,7 @@
   <el-table-column align="center" label="操作">
    <template slot-scope="props">
     <el-button type="text" size="small" @click="upDateDialog(props.row)">修改</el-button>
-    <el-button type="text" size="small" @click="removeItem(props.row)">{{props.row.Status==0?"移除":"有效"}}</el-button>
+    <el-button type="text" size="small" @click="removeItem(props.row)">{{props.row.Status==1?"移除":"有效"}}</el-button>
   </template>
 </el-table-column>
 </el-table>
@@ -135,7 +135,7 @@ export default {
 					else callback()
 				}
 			return {
-        options:[{value:0,label:"有效"},{value:1,label:"无效"}],
+        options:[{value:-1,label:"全部"},{value:1,label:"有效"},{value:0,label:"无效"}],
         roles:[{
           value: '管理员',
           label: '管理员'
@@ -148,11 +148,10 @@ export default {
             isAdd:true,                    // 是否新增
              isDialogVisible:false,         // 是否显示模态框
              serachForm: {                  // 查询的表单  
-
-             	
-             },
-        form:                      // 课程的表单
-        {
+             userName:"",
+             status:-1
+            },
+        form: {                     // 课程的表单
           "Id": 1,
           "LoginName": "",
           "LoginPwd": "",
